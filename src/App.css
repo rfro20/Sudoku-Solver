@@ -28,6 +28,103 @@
   color: #61dafb;
 }
 
+.cellInput {
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+  text-align: center;
+  padding: 0px;
+  border: 1px solid black;
+}
+
+table {
+  border-collapse: collapse;
+  border: 3px solid wheat;
+  background-color: solid wheat;
+}
+
+td {
+  padding: 0
+}
+
+.borderRow {
+  border-bottom: 2px solid black;
+}
+
+.borderCol {
+  border-right: 2px solid black;
+}
+
+.solveDiv {
+  margin-top: 20px;
+  margin-bottom: 100px;
+}
+
+.solveButton {
+  background-color: #6a86d2;
+  font-weight: bold;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  box-shadow: 0 3px #999;
+  text-align:center;
+  margin:10px;
+}
+
+.solveButton:hover {
+  background-color: #5575cb;
+}
+
+.solveButton:active {
+  background-color: #7f97d8;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.clearButton {
+  background-color: #ed2939;
+  font-weight: bold;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  box-shadow: 0 3px #999;
+  text-align: center;
+  margin: 10px;
+}
+
+.clearButton:hover {
+  background-color: #ff2400;
+}
+
+.clearButton:active {
+  background-color: #cd5c5c;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.checkButton {
+  background-color: #ff8b3d;
+  font-weight: bold;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  box-shadow: 0 3px #999;
+  text-align: center;
+  margin: 10px;
+}
+
+.checkButton:hover {
+  background-color: #ff781f;
+}
+
+.checkButton:active {
+  background-color: #ff9d5c;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
