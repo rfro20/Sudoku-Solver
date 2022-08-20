@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import './App.css';
 
 function App() {
@@ -13,6 +13,7 @@ function App() {
                   [0,0,0,0,0,0,0,0,0],
                   [0,0,0,0,0,0,0,0,0]
                 ];
+
   const initial = [ [5,3,0,0,7,0,0,0,0],
                     [6,0,0,1,9,5,0,0,0],
                     [0,9,8,0,0,0,0,6,0],
@@ -23,13 +24,18 @@ function App() {
                     [0,0,0,4,1,9,0,0,5],
                     [0,0,0,0,8,0,0,7,9] 
                   ];
-    
+
+  // State Hook for altering sudoku board
   const [board, setBoard] = useState(initial);
+
+  // State Hook for altering displayed text under board
+  const [textBox, setTextBox] = useState("");
 
   function deepCopy(arr) {
     return JSON.parse(JSON.stringify(arr));
   }
 
+  // Update board based on user input
   function onInputChange(e, row, col) {
     var val = parseInt(e.target.value) || 0;
     var grid = deepCopy(board);
@@ -45,6 +51,7 @@ function App() {
     setBoard(empty);
   }
 
+  // Hit flask endpoint to check board validity and get results
   function check() {
     return fetch('/check', {
       method : 'POST',
@@ -57,24 +64,25 @@ function App() {
     });
   }
 
+  // Hit Flask endpoint to solve and get results
   function solve() {
-      fetch('/solve', {
+      return fetch('/solve', {
       method : 'POST',
       headers: {
         'Content-type': 'application/json',
       },
       body : JSON.stringify({"board": board})
     }).then((response) => response.json()).then((resp) => {
-      console.log(resp);
       if(resp["solved"] === true) {
-        console.log("solved!");
-        console.log(resp["board"]);
         setBoard(resp["board"]);
+        return Promise.resolve([true, null]);
       } else {
         if (resp["multiple_sols"] === true) {
-          console.log("multiple solutions...");
+          setBoard(resp["board"]);
+          return Promise.resolve([false, true]);
+
         }
-        console.log("not solved!");
+        return Promise.resolve([false, false]);
       }
     });
   }
@@ -99,19 +107,39 @@ function App() {
             }
           </tbody>
         </table>
+        <div className="gameTextDiv">
+          <p className="gameText">
+            {textBox}
+          </p>
+        </div>
         <div className="solveDiv">
-          <button className="clearButton" onClick={clear}>Reset</button>
+          <button className="clearButton" onClick={() => {
+            clear();
+            setTextBox("");
+          }}>Clear</button>
           <button className="checkButton" onClick={() => {
-              check().then((valid) => {
-                if(valid === false) {
-                  alert("This is not a valid board.");
-                } else {
-                  alert("this is a valid board.");
-                }
-              });
+            check().then((valid) => {
+              if(valid === false) {
+                setTextBox("This is not a valid board.")
+              } else {
+                setTextBox("This is a valid board.");
+              }
+            });
             }
           }>Check</button>
-          <button className="solveButton" onClick={solve}>Solve</button>
+          <button className="solveButton" onClick={() => {
+            solve().then((response) => {
+              if(response[0] === true) {
+                setTextBox("Solved!");
+              } else {
+                if(response[1] === true) {
+                  setTextBox("Multiple solutions exist to this board.");
+                } else {
+                  setTextBox("This board is either invalid or unsolvable.")
+                }
+              }
+            });
+          }}>Solve</button>
         </div>
       </header>
     </div>

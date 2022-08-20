@@ -2,19 +2,8 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
-  background-color: #282c34;
+  background-color: #2d37bd;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -22,6 +11,28 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  animation: 100000ms ease-in-out infinite color-change;
+}
+
+@keyframes color-change {
+  0% {
+    background-color: teal;
+  }
+  20% {
+    background-color: darkblue;
+  }
+  40% {
+    background-color: indianred;
+  }
+  60% {
+    background-color: violet;
+  }
+  80% {
+    background-color: green;
+  }
+  100% {
+    background-color: teal;
+  }
 }
 
 .App-link {
@@ -62,6 +73,7 @@ td {
 
 .solveButton {
   background-color: #6a86d2;
+  color: white;
   font-weight: bold;
   padding: 12px 20px;
   border: none;
@@ -84,6 +96,7 @@ td {
 
 .clearButton {
   background-color: #ed2939;
+  color: white;
   font-weight: bold;
   padding: 12px 20px;
   border: none;
@@ -106,6 +119,7 @@ td {
 
 .checkButton {
   background-color: #ff8b3d;
+  color: white;
   font-weight: bold;
   padding: 12px 20px;
   border: none;
@@ -125,11 +139,4 @@ td {
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+

@@ -1,4 +1,3 @@
-import time
 from solver import is_valid_sudoku, attempt_solve
 from flask import Flask, request
 

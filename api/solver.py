@@ -8,9 +8,12 @@ def is_valid_sudoku(board):
         for col in range(n):
             if board[row][col] == 0:
                 continue
+
             curr_num = board[row][col] - 1
             pos = 1 << curr_num
             
+            # Use bitmasking to see if curr_num has already occupied a 1 in that certain row/column/box
+            # Ex) There is already a three and 5 occupying 000010100 (binary representation of 20)
             if (rows[row] & pos) != 0:
                 return False
             rows[row] |= pos
@@ -50,7 +53,7 @@ def attempt_solve(board):
 
     sols = 0    
     ans = []
-    # Now, backtrack
+    # Now, backtrack until solution is found, not found, or multiple are found
     def backtrack(row, col):
         nonlocal sols
         if row == n:
