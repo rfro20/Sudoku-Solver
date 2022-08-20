@@ -8,5 +8,5 @@
 
 ## General Information
 
-1. If the inputted board has more than one solution when calling `solve()`, one solution will be shown on the screen. But, it is an **invalid** board nonetheless.
+1. If the inputted board has more than one solution when calling `solve()`, no solution will be shown on the screen, as it is an **invalid** board.
 2. Checking your board checks to see if the current board is a valid sudoku board, following the rules of rows, columns, and 3x3 boxes.

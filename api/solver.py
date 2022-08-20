@@ -80,5 +80,4 @@ def attempt_solve(board):
             backtrack(row, col+1)
         
     backtrack(0, 0)
-    print(ans)
     return sols == 1, sols, ans

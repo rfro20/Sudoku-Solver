@@ -83,7 +83,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h3>Sudoku Solver</h3>
-        <p>Enter any numbers in below!</p>
+        <p>Enter any numbers in below, or just hit solve!</p>
         <table>
           <tbody>
             {
@@ -102,7 +102,13 @@ function App() {
         <div className="solveDiv">
           <button className="clearButton" onClick={clear}>Reset</button>
           <button className="checkButton" onClick={() => {
-              check().then((valid) => console.log(valid));
+              check().then((valid) => {
+                if(valid === false) {
+                  alert("This is not a valid board.");
+                } else {
+                  alert("this is a valid board.");
+                }
+              });
             }
           }>Check</button>
           <button className="solveButton" onClick={solve}>Solve</button>
