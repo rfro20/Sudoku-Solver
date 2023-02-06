@@ -56,12 +56,12 @@ def attempt_solve(board):
     # Now, backtrack until solution is found, not found, or multiple are found
     def backtrack(row, col):
         nonlocal sols
-        if row == n:
+        if row >= n:
             sols += 1
             ans.append([[num for num in row] for row in board])
             return
         
-        if col == n:
+        if col >= n:
             backtrack(row+1, 0)
             return
         
@@ -72,13 +72,12 @@ def attempt_solve(board):
                     rows[row].add(i)
                     cols[col].add(i)
                     boxes[box_index(row,col)].add(i)
-                    backtrack(row, col+1)
-                    if sols > 1:
-                        return
-                    board[row][col] = 0
-                    rows[row].remove(i)
-                    cols[col].remove(i)
-                    boxes[box_index(row, col)].remove(i)
+                    backtrack(row, col+1) # Exhausing Every situation
+                    if len(ans) <= 100:
+                        board[row][col] = 0
+                        rows[row].remove(i)
+                        cols[col].remove(i)
+                        boxes[box_index(row, col)].remove(i)
         else:
             backtrack(row, col+1)
         

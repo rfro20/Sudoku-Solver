@@ -75,14 +75,15 @@ function App() {
     }).then((response) => response.json()).then((resp) => {
       if(resp["solved"] === true) {
         setBoard(resp["board"]);
-        return Promise.resolve([true, null]);
+        return Promise.resolve([true, null]); // Solved, N/A
       } else {
         if (resp["multiple_sols"] === true) {
+          console.log("multiple sols?");
           setBoard(resp["board"]);
-          return Promise.resolve([false, true]);
+          return Promise.resolve([false, true]); // Not solved, multiple solutions DO exist
 
         }
-        return Promise.resolve([false, false]);
+        return Promise.resolve([false, false]); // Not solved, not solvable.
       }
     });
   }
